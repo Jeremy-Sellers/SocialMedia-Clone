@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/head.html :: head ('Home')"></head>
+
+<body class="container">
+<div class="row">
+    <div class="col">
+        1 of 3
+    </div>
+    <div class="col-6">
+        2 of 3
+    </div>
+    <div class="col">
+        3 of 3
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer th:replace="partials/footer.html :: footer"></footer>
+<!--  Partials Script  -->
+<script th:replace="partials/script.html :: bootstrap-js"></script>
+<script th:fragment="jquery" src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head th:replace="partials/head.html :: head ('SocMed Index')">
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Main</title>
 </head>
-<body>
-<h1>This is the index page</h1>
+<body class="">
+
+<div class="card m-5 w-50">
+    <div class="card-header">
+        SocMed form header
+    </div>
+
+    <div class="card-body">
+        <!--Start of Form -->
+        <form th:action="@{/login}" method="post" class="loginForm ">
+            <!--Error Message -->
+            <h3 th:if="${param.error}" class="d-flex justify-content-center text-danger">
+                Invalid Username and Password
+            </h3>
+            <!--Logged Out Message -->
+            <h3 th:if="${param.logout}" class="d-flex justify-content-center">
+                You have Successfully logged out!
+            </h3>
+            <!-- Header-->
+            <h1 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h1>
+            <!-- UserName -->
+            <div class="form-outline mb-4" data-error="Username Is Invalid">
+                <label for="username" class="text-dark loginLabel">Username</label>
+                <input id="username"
+                       name="username"
+                       type="text"
+                       class="form-control loginWrongInput"
+                       required/>
+            </div>
+            <!-- Password -->
+            <div class="form-outline mb-4" >
+                <label for="password" class="loginLabel">Password</label>
+                <input id="password"
+                       name="password"
+                       type="password"
+                       class="form-control"
+                       required/>
+            </div>
+            <div class="pt-1 mb-4">
+                <input type="submit" value="Log In" class="btn btn-primary btn-lg btn-block"/>
+            </div>
+            <p class="mb-5 pb-lg-2">Don't have an account? <a href="/register">Register here</a></p>
+        </form>
+    </div>
+</div>
+
+
+<footer th:replace="partials/footer.html :: footer"></footer>
 </body>
+<!--  Partials Script  -->
+<script th:replace="partials/script.html :: bootstrap-js"></script>
 </html>

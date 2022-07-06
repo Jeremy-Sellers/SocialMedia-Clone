@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head th:fragment="head (title)">
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+</head>
+<body>
+
+<!--NavbarWhen a user is logged out :)-->
+
+<div sec:authorize="isAnonymous()">
+    <nav th:fragment="LoggedOutNavbar" class="navbar navbar-expand-lg fixed-top shadow bg-light">
+        <div class="container">
+            <a class="navbar-brand col-4" href="/">
+                <img src="../images/book_logo.png" alt="" width="50" height="40"></a>
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav d-flex justify-content-end col-11">
+                    <a class="nav-link link-dark" aria-current="page" href="/about">About Us</a>
+                    <a class="nav-link link-dark mx-lg-5" href="/login">Login</a>
+                    <a class="nav-link link-dark" href="/register">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<!--NavbarWhen a user is logged in :)-->
+<div sec:authorize="isAuthenticated()">
+    <nav th:fragment="LoggedInNavbar" class="navbar navbar-expand-lg fixed-top shadow bg-light">
+        <div class="container">
+            <a class="navbar-brand col-4" href="/main">
+                <img src="../images/book_logo.png" alt="" width="50" height="40"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav d-flex justify-content-around col-11">
+                    <a class="nav-link link-dark" href="/main">Home</a>
+                    <a class="nav-link link-dark" href="/about">About Us</a>
+                    <a class="nav-link link-dark" th:href="@{/profile/{username}(username=${#authentication.principal.username})}">Profile</a>
+                    <form th:action="@{/logout}" th:method="post">
+                        <button class="btn-link btn link-dark">Logout <i class="fa-solid fa-right-from-bracket"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<!--Review Form Navbar-->
+<div sec:authorize="isAuthenticated()">
+    <nav th:fragment="reviewFormNavbar" class="navbar navbar-expand-lg fixed-top shadow bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand col-4" href="/main">
+                <img src="/images/book_logo.png" alt="" width="50" height="40"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav d-flex justify-content-end col-11">
+                    <a class="nav-link link-dark" href="/main">Home</a>
+                    <a class="nav-link link-dark" href="/about">About Us</a>
+                    <a class="nav-link link-dark" th:href="@{/profile/{username}(username=${#authentication.principal.username})}">Profile</a>
+                    <form th:action="@{/logout}" th:method="post">
+                        <button class="btn-link btn link-dark">Logout <i class="fa-solid fa-right-from-bracket"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<!--Review form Navbar-->
+
+</body>
+</html>
