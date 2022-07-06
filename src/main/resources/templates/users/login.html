@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+
+<div class="col-md-6 col-lg-7 d-flex align-items-center text-dark">
+    <div class="card-body p-4 p-lg-5 text-black">
+        <!--Start of Form -->
+        <form th:action="@{/login}" method="post" class="loginForm ">
+            <!--Error Message -->
+            <h3 th:if="${param.error}" class="d-flex justify-content-center text-danger">
+                Invalid Username and Password
+            </h3>
+            <!--Logged Out Message -->
+            <h3 th:if="${param.logout}" class="d-flex justify-content-center">
+                You have Successfully logged out!
+            </h3>
+            <!-- Header-->
+            <h1 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h1>
+            <!-- UserName -->
+            <div class="form-outline mb-4" data-error="Username Is Invalid">
+                <label for="username" class="text-dark loginLabel">Username</label>
+                <input id="username"
+                       name="username"
+                       type="text"
+                       class="form-control loginWrongInput"
+                       required/>
+            </div>
+            <!-- Password -->
+            <div class="form-outline mb-4" >
+                <label for="password" class="loginLabel">Password</label>
+                <input id="password"
+                       name="password"
+                       type="password"
+                       class="form-control"
+                       required/>
+            </div>
+            <div class="pt-1 mb-4">
+                <input type="submit" value="Log In" class="btn btn-primary btn-lg btn-block"/>
+            </div>
+            <p class="mb-5 pb-lg-2">Don't have an account? <a href="/register">Register here</a></p>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
