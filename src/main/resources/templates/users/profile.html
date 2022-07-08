@@ -298,14 +298,14 @@
                                 <!-- Will see the username of the page owner-->
                                 <div class="reviewAfterSettingButtonClicked pt-3 hide" th:data-id="${post.id}">
 
-                                    <form th:action="@{/review/{id}/ (id=${post.id})}"
+                                    <form th:action="@{/post/{id}/ (id=${post.id})}"
                                           th:object="${post}"
                                           method="post"
                                           class=" review-update-form pt-3">
                                         <section class="form-group col-12 mt-2">
-                                            <label for="reviewBody" class="fw-bold form-label"><strong>Review</strong></label>
-                                            <input id="reviewBody"
-                                                   name="reviewBody"
+                                            <label for="postBody" class="fw-bold form-label"><strong>Post</strong></label>
+                                            <input id="postBody"
+                                                   name="postBody"
                                                    class="form-control"
                                                    maxlength="2500"
                                                    th:value="${post.postBody}">
@@ -332,12 +332,11 @@
                                             </button>
                                         </form>
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
                         <!-- End of Card --->
+
                     </div>
                 </section>
             </div>
@@ -358,10 +357,10 @@
                 }
 
                 function editReviewBtnClicked(event) {
-                    const reviewId = event.target.value;
+                    const postId = event.target.value;
 
 
-                    document.querySelector(`.reviewAfterSettingButtonClicked[data-id="${reviewId}"]`).classList.toggle(`hide`)
+                    document.querySelector(`.reviewAfterSettingButtonClicked[data-id="${postId}"]`).classList.toggle(`hide`)
                 }
 
 

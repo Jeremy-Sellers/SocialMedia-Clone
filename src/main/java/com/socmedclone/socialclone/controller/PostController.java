@@ -8,10 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PostController {
@@ -44,9 +41,19 @@ public class PostController {
         return "main/main";
     }
 
+    @PostMapping("/post/{id}")
+    public String updatePost(@ModelAttribute Post post, @PathVariable long id, Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
+        Post findPost = postDao.findById(id);
+        findPost.setPostBody(post.getPostBody());
+        postDao.save(findPost);
+        return "redirect:/main";
+    }
+
     @PostMapping("/post/delete")
-    public String deleteReview(@RequestParam(name= "deleteReview") long id) {
+    public String deletePost(@RequestParam(name= "deleteReview") long id) {
         postDao.deleteById(id);
-        return "home/index";
+        return "redirect:/main";
     }
 }
