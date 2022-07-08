@@ -53,11 +53,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
 //                        "/reviews/create", // only authenticated users can create reviews
-//                        "/reviews/{id}/edit", // only authenticated users can edit reviews
-                        "/main"
-//                        , "/books/{id}", "/profile","/profile/{username}", "/reviews","/books"
-                        )
-                .authenticated()
+//                        "/post/{id}/", // only authenticated users can edit posts
+                        "/main","/profile/{username}", "/profile"
+//                        , "/books/{id}", "/reviews","/books"
+                        ).authenticated()
         ;
     }
 }

@@ -38,7 +38,7 @@ public class PostController {
         User user = principal;
         postToSave.setUser(user);
         Post newPost = postDao.save(postToSave);
-        return "main/main";
+        return "redirect:/main";
     }
 
     @PostMapping("/post/{id}")
