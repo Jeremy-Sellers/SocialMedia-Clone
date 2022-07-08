@@ -9,7 +9,32 @@
         1 of 3
     </div>
     <div class="col-6">
-        2 of 3
+        <!--Post form-->
+        <form th:action="@{/main}" class="rounded" id="postForm" th:method="post" th:object="${post}">
+            <section class="form-group">
+                <label for="postBody" class="text-dark"></label>
+                <textarea id="postBody"
+                placeholder="What's going on today?"
+                th:field="*{postBody}"
+                rows="5"
+                class="form-control">
+                </textarea>
+            </section>
+            <input type="submit">
+        </form>
+        <!--Post form-->
+
+    <div th:each="post : ${posts}">
+        <div class="card">
+            <div class="card-body">
+                <a th:href="|/profile/${post.getUser().getUsername()}|"><h5 class="card-title" th:text="${post.user.username}"></h5>
+                </a>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text" th:text="${post.postBody}"></p>
+            </div>
+        </div>
+    </div>
+
     </div>
     <div class="col">
         3 of 3
