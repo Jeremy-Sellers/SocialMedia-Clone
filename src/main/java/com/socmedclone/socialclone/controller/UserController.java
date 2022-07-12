@@ -67,7 +67,6 @@ public class UserController {
         User user = userDao.findByUsername(username);
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-
         model.addAttribute("posts", postDao.findAllByUser(user));
         model.addAttribute("user",user);
         model.addAttribute("loggedInUser",loggedInUser);

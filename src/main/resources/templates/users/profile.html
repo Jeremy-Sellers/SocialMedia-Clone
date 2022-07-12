@@ -288,7 +288,7 @@
 
                                         <div class="d-flex justify-content-center mb-2">
                                             <button type="button" th:value="${post.id}"
-                                                    class="btn btn-outline-secondary edit-review d-flex SettingsButtonProfilePage align-items-center justify-content-center">
+                                                    class="btn btn-outline-secondary edit-post d-flex SettingsButtonProfilePage align-items-center justify-content-center">
                                                 <i class="fa-solid p-0 m-0 fa-pen-to-square unclickable"></i>
                                             </button>
                                         </div>
@@ -296,12 +296,12 @@
                                 </div>
                                 <!-- If the user looks at another user's profile -->
                                 <!-- Will see the username of the page owner-->
-                                <div class="reviewAfterSettingButtonClicked pt-3 hide" th:data-id="${post.id}">
+                                <div class="postAfterSettingButtonClicked pt-3 hide" th:data-id="${post.id}">
 
                                     <form th:action="@{/post/{id}/ (id=${post.id})}"
                                           th:object="${post}"
                                           method="post"
-                                          class=" review-update-form pt-3">
+                                          class=" post-update-form pt-3">
                                         <section class="form-group col-12 mt-2">
                                             <label for="postBody" class="fw-bold form-label"><strong>Post</strong></label>
                                             <input id="postBody"
@@ -336,7 +336,6 @@
                             </div>
                         </div>
                         <!-- End of Card --->
-
                     </div>
                 </section>
             </div>
@@ -356,15 +355,15 @@
                     document.getElementById("settingsButton").style.display = "block";
                 }
 
-                function editReviewBtnClicked(event) {
+                function editPostBtnClicked(event) {
                     const postId = event.target.value;
 
 
-                    document.querySelector(`.reviewAfterSettingButtonClicked[data-id="${postId}"]`).classList.toggle(`hide`)
+                    document.querySelector(`.postAfterSettingButtonClicked[data-id="${postId}"]`).classList.toggle(`hide`)
                 }
 
 
-                $('.edit-review').click(editReviewBtnClicked);
+                $('.edit-post').click(editPostBtnClicked);
 
 
             </script>
