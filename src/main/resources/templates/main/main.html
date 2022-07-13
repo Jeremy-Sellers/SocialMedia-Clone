@@ -36,30 +36,10 @@
                     <a th:href="|/profile/${post.getUser().getUsername()}|"><h5 class="card-title" th:text="${post.user.username}"></h5></a>
                     <p class="card-text" th:text="${post.postBody}"></p>
                     <p th:text="${post.likes}"></p>
-                    <div class="">
-                        <form class="likeForm" th:method="post" th:action="@{/post/like}">
-                            <input type="hidden" th:value="${post.id}" name="likePost">
-                            <button
-                                    class="btn btn-primary px-3 w-100 mx-auto border-0"
-                                    style="background-color: #c61118;">
-                                Like
-                            </button>
-                        </form>
-                    </div>
-
-                <!--Comment Form-->
-                    <p>
-                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Button with data-bs-target
-                        </button>
-                    </p>
-                    <div class="collapse" id="collapseExample">
-                        <div class="card card-body">
-                            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-                        </div>
-                    </div>
-                <!--Comment Form-->
-
+                    <p th:text=""
+                    <form th:action="@{/post/{id}/comment(id=${post.id})}">
+                        <button type="submit" class="btn btn-primary btn-sm">Comment</button>
+                    </form>
                 </div>
             </div>
         </div>

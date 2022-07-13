@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="container-fluid">
+
+<div class="row">
+
+    <div class="col">
+        <nav th:replace="partials/navbar.html :: NavBar"></nav>
+    </div>
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <a th:href="|/profile/${post.getUser().getUsername()}|"><h5 class="card-title" th:text="${post.user.username}"></h5></a>
+                <p class="card-text" th:text="${post.postBody}"></p>
+                <p th:text="${post.likes}"></p>
+            </div>
+        </div>
+
+        <form th:action="@{/post/{id}/comment(id=${post.id})}" id="commentForm" th:method="post" th:object="${comment}">
+
+            <section class="form-group">
+                <label for="commentBody" class="text-dark">Comment</label>
+                <input id="commentBody"
+                       th:field="*{commentBody}"
+                       class="form-control"
+                       type="text"
+                       maxlength="250"
+                >
+            </section>
+            <input type="submit">
+        </form>
+    </div>
+
+    <div class="col">
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<!--  Partials Script  -->
+<script th:replace="partials/script.html :: bootstrap-js"></script>
+<script th:fragment="jquery" src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</body>
+</html>

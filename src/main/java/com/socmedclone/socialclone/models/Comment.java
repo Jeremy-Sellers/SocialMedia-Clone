@@ -21,9 +21,9 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Comment(long id, String comment, Post post, User user) {
+    public Comment(long id, String commentBody, Post post, User user) {
         this.id = id;
-        this.commentBody = comment;
+        this.commentBody = commentBody;
         this.post = post;
         this.user = user;
     }
@@ -39,12 +39,12 @@ public class Comment {
         this.id = id;
     }
 
-    public String getComment() {
+    public String getCommentBody() {
         return commentBody;
     }
 
-    public void setComment(String comment) {
-        this.commentBody = comment;
+    public void setCommentBody(String commentBody) {
+        this.commentBody = commentBody;
     }
 
     public Post getPost() {

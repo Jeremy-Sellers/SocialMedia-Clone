@@ -55,13 +55,14 @@ public class PostController {
         return "redirect:/main";
     }
 
-//    @PostMapping("/post/like")
-//    public String likePost(@RequestParam(name = "likePost") long id){
-//       Post post = postDao.findById(id);
-//       post.setLikes(post.getLikes() + 1);
-//       postDao.save(post);
-//        return "redirect:/main";
-//    }
+    @PostMapping("/post/like")
+    public String likePost(@ModelAttribute Post post, @PathVariable long id, Model model){
+        Post findPost = postDao.findById(id);
+        findPost.setLikes(post.getLikes() + 1);
+        postDao.save(findPost);
+//       postDao.findById(id).setLikes(postDao.findById(id).getLikes() + 1);
+        return "redirect:/main";
+    }
 
     @GetMapping("/post/{id}/comment")
     public String commentForm(@PathVariable(name = "id") long postId, Model model){
@@ -69,13 +70,13 @@ public class PostController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
         model.addAttribute("post", postDao.findById(postId));
-        return "redirect:/main";
+        return "main/post";
     }
 
     @PostMapping("/post/{id}/comment")
     public String commentSubmit(@PathVariable(name = "id") long postId, @ModelAttribute Comment comment, Model model){
         Comment commentToSave = new Comment();
-        commentToSave.setComment(comment.getComment());
+        commentToSave.setCommentBody(comment.getCommentBody());
         commentToSave.setPost(postDao.findById(postId));
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = principal;
