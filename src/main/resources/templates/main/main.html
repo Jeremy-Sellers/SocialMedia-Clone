@@ -3,43 +3,76 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/head.html :: head ('Home')"></head>
 
-<body class="container">
-<div class="row">
-    <div class="col">
-        1 of 3
-    </div>
-    <div class="col-6">
-        <!--Post form-->
-        <form th:action="@{/main}" class="rounded" id="postForm" th:method="post" th:object="${post}">
-            <section class="form-group">
-                <label for="postBody" class="text-dark"></label>
-                <textarea id="postBody"
-                placeholder="What's going on today?"
-                th:field="*{postBody}"
-                rows="5"
-                class="form-control">
-                </textarea>
-            </section>
-            <input type="submit">
-        </form>
-        <!--Post form-->
+<body class="container-fluid">
+<!--Left Side-->
+    <div class="row ">
 
-    <div th:each="post : ${posts}">
-        <div class="card">
-            <div class="card-body">
-                <a th:href="|/profile/${post.getUser().getUsername()}|"><h5 class="card-title" th:text="${post.user.username}"></h5>
-                </a>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text" th:text="${post.postBody}"></p>
+        <div class="col">
+            <nav th:replace="partials/navbar.html :: NavBar"></nav>
+        </div>
+
+    <!--Middle of Page-->
+        <div class="col-6">
+
+            <!--Post form-->
+            <form th:action="@{/main}" class="rounded" id="postForm" th:method="post" th:object="${post}">
+                <section class="form-group">
+                    <label for="postBody" class="text-dark"></label>
+                    <textarea id="postBody"
+                    placeholder="What's going on today?"
+                    th:field="*{postBody}"
+                    rows="5"
+                    class="form-control">
+                    </textarea>
+                </section>
+                <input type="submit">
+            </form>
+            <!--Post form-->
+
+    <!--Shows posts from database-->
+        <div th:each="post : ${posts}">
+            <div class="card">
+                <div class="card-body">
+                    <a th:href="|/profile/${post.getUser().getUsername()}|"><h5 class="card-title" th:text="${post.user.username}"></h5></a>
+                    <p class="card-text" th:text="${post.postBody}"></p>
+                    <p th:text="${post.likes}"></p>
+                    <div class="">
+                        <form class="likeForm" th:method="post" th:action="@{/post/like}">
+                            <input type="hidden" th:value="${post.id}" name="likePost">
+                            <button
+                                    class="btn btn-primary px-3 w-100 mx-auto border-0"
+                                    style="background-color: #c61118;">
+                                Like
+                            </button>
+                        </form>
+                    </div>
+
+                <!--Comment Form-->
+                    <p>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Button with data-bs-target
+                        </button>
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                        </div>
+                    </div>
+                <!--Comment Form-->
+
+                </div>
             </div>
         </div>
-    </div>
+        <!--Show posts from database-->
 
+        </div>
+    <!--Middle of page-->
+
+    <!--Right side-->
+        <div class="col">
+            3 of 3
+        </div>
     </div>
-    <div class="col">
-        3 of 3
-    </div>
-</div>
 
 
 
@@ -65,5 +98,13 @@
 <!--  Partials Script  -->
 <script th:replace="partials/script.html :: bootstrap-js"></script>
 <script th:fragment="jquery" src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+    $('.likeForm .btn').click(function (e) {
+        e.preventDefault()
+            $(".likeForm").submit();
+    })
+
+</script>
 </body>
 </html>

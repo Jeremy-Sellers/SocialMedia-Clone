@@ -1,15 +1,8 @@
 /*------     Profile Page     -----*/
 /*-----  Profile  -----*/
-.profileSideBar {
-    background-color: #649BFD2D;
-    height: auto;
-}
 .wholeContainer{
     height: 100vh;
 
-}
-.rightSideOfPage{
-    height: auto;
 }
 
 .SettingsButtonProfilePage{
@@ -20,7 +13,6 @@
 .SettingsButtonProfilePage:hover{
     transform: scale(1.2);
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-
 }
 #profilePageAfterSettingButtonIsClicked{
     display:none;

@@ -5,19 +5,26 @@
         xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
 <head th:replace="partials/head.html :: head ('Profile')"> </head>
-<body class="p-0 m-0">
+<body class="container-fluid">
 
-<section class="d-flex row pt-5 mt-3 wholeContainer">
-    <!-------  Start of Left Side Bar   ------->
-    <section id="profileSideBar" class="profileSideBar col-12 col-md-4 pt-5">
+    <div class="row ">
+
+    <!--Left Side-->
+    <div class="col" style="background-color: red">
+        <nav th:replace="partials/navbar.html :: NavBar"></nav>
+    </div>
+    <!--Left Side-->
+
+    <!--Middle Page-->
+    <div class="col-6">
         <!-----  Header & Setting Button  ----->
-        <div class="pb-4">
+        <div class="pb-4 card-title">
             <!-- If the user is the owner, then they will be introduced with a welcome page-->
             <div th:if="${loggedInUser.id == user.id}">
                 <div sec:authorize="isAuthenticated()" class="d-flex justify-content-center">
-                    <h1 class="text-center d-block">Welcome, [[${user.username}]]</h1>
+                    <h1 class="text-center d-block flex-grow-1">[[${user.username}]]</h1>
                     <!-------  Setting Button   ------->
-                    <span id="settingsButton">
+                    <span id="settingsButton mx-auto">
                           <button
                                   class="btn btn-outline-dark SettingsButtonProfilePage d-flex align-items-center justify-content-center ms-3"
                                   th:id="SettingsButtonProfilePage"
@@ -40,15 +47,11 @@
             <div class="d-flex row flex-md-column flex-row justify-content-center mx-2 profilePageBeforeSettingButtonIsClicked">
                 <!---- Bio ---->
                 <p class="col-10">
-                    <strong class="fw-bold">Bio: <br /></strong><span th:text="${user.bio}" />
-                </p>
-                <!---- Email ---->
-                <p class="col-10">
-                    <strong class="fw-bold">Email: <br /></strong><span th:text="${user.email}" />
+                   <span th:text="${user.bio}"/>
                 </p>
                 <!---- Location ---->
-                <p class="col-10">
-                    <strong class="fw-bold">Location: <br /></strong><span th:text="${user.city} + ', ' + ${user.state}" />
+                <p class="col-10 text-muted">
+                    <span th:text="${user.city} + ', ' + ${user.state}" />
                 </p>
             </div>
         </div>
@@ -253,35 +256,19 @@
                 </div>
             </form>
         </div>
-    </section>
-
-
-    <!-------  RIGHT side of page  ------->
-    <div class="col-12 col-md-8 bg-light py-5 rightSideOfPage">
-        <section class="mb-5 pb-3 container-fluid my-5">
-            <h2 class="fw-light py-3 text-center">
-                <strong class="fw-bolder">Posts</strong>
-            </h2>
-            <div class="row d-flex flex-wrap justify-content-around" >
-                <!-- *CARD STARTS -->
-                <section class="card border-0 shadow m-2 position-relative" style="max-width: 483px;" th:each="post : ${posts}">
+    <!-- *CARD STARTS -->
+        <section class="card border-0 shadow m-2 position-relative" th:each="post : ${posts}">
                     <!-- lets context and img go side by side with ROW -->
                     <div class="row g-0">
-<!--                        &lt;!&ndash; Image Container &ndash;&gt;-->
-<!--                        <div class="col-md-4 px-2 py-2 col-10">-->
-<!--                            &lt;!&ndash; Image &ndash;&gt;-->
-<!--                            <a th:href="@{/books/{id}(id=${review.allBookTable.id})}"><img th:src="${review.allBookTable.bookImage}" alt="..." class="img-fluid rounded-start"/></a>-->
-<!--                        </div>-->
                         <div class="col-md-8">
                             <div class="card-body">
                                 <!-- Username -->
                                 <a th:href="|/profile/${post.getUser().getUsername()}|"> <p class="p-0 m-0" th:text="'By '+${post.user.username}"></p></a>
-
                                 <!--  Card Body  -->
                                 <div class="card-body p-0 m-0">
                                     <p class="card-text cardText bg-light" style="height:90px;overflow-y: scroll" th:text="${post.postBody}"></p>
                                 </div>
-
+                                <p th:text="${post.likes}"></p>
                                 <!-- FOOTER -->
                                 <div th:if="${loggedInUser.id == user.id}" class="position-absolute top-0 end-0 m-3">
                                     <div sec:authorize="isAuthenticated()">
@@ -324,7 +311,7 @@
                                     </form>
                                     <div class="">
                                         <form class="deleteForm" th:method="post" th:action="@{/post/delete}">
-                                            <input type="hidden" th:value="${post.id}" name="deleteReview">
+                                            <input type="hidden" th:value="${post.id}" name="deletePost">
                                             <button
                                                     class="btn btn-primary px-3 w-100 mx-auto border-0"
                                                     style="background-color: #c61118;">
@@ -337,8 +324,15 @@
                         </div>
                         <!-- End of Card --->
                     </div>
-                </section>
-            </div>
+        </section>
+    </div>
+
+    <!--Right side-->
+    <div class="col" style="background-color: deepskyblue">
+        3 of 3
+    </div>
+
+    </div>
 
             <script th:replace="partials/script.html :: bootstrap-js"></script>
 

@@ -6,6 +6,32 @@
 </head>
 <body>
 
+<!--Perma NavBar-->
+<div class="card">
+    <nav th:fragment="NavBar">
+        <nav class="navbar">
+            <div class="container-fluid d-flex flex-column">
+
+                <div class="p-2">
+                <a class="navbar-brand" href="/main">
+                    <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                    Home
+                </a>
+                </div>
+
+                <div class="p-2">
+                <a class="navbar-brand" th:href="@{/profile/{username}(username=${#authentication.principal.username})}">
+                    <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                    Profile
+                </a>
+                </div>
+
+
+            </div>
+        </nav>
+    </nav>
+</div>
+
 <!--NavbarWhen a user is logged out :)-->
 
 <div sec:authorize="isAnonymous()">

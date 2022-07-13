@@ -1,0 +1,16 @@
+package com.socmedclone.socialclone.repository;
+
+import com.socmedclone.socialclone.models.Comment;
+import com.socmedclone.socialclone.models.Post;
+import com.socmedclone.socialclone.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface CommentRepository extends JpaRepository<Comment, Long> {
+    Comment findById(long id);
+
+    List<Comment> findAllByUser(User user);
+
+    List<Comment> findAllByPost(Post post);
+}

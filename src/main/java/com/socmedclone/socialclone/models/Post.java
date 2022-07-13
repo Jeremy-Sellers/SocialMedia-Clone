@@ -3,6 +3,7 @@ package com.socmedclone.socialclone.models;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -24,6 +25,9 @@ public class Post {
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<Comment> comments;
 
 
     public Post(String postBody, Long likes, String comment, User user) {
