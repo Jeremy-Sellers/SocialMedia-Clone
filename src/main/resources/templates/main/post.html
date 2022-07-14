@@ -20,9 +20,8 @@
                 <p th:text="${post.likes}"></p>
             </div>
         </div>
-
+<!--Comment Form-->
         <form th:action="@{/post/{id}/comment(id=${post.id})}" id="commentForm" th:method="post" th:object="${comment}">
-
             <section class="form-group">
                 <label for="commentBody" class="text-dark">Comment</label>
                 <input id="commentBody"
@@ -34,6 +33,20 @@
             </section>
             <input type="submit">
         </form>
+<!--Comment Form-->
+
+<section class="card border-0 shadow m-2" th:each="comment : ${commentList}">
+    <a th:href="|/profile/${comment.getUser().getUsername()}|"> <p th:text="${comment.user.username}"></p> </a>
+    <p th:text="${comment.commentBody}"></p>
+
+<!--    <div class="card-body">-->
+<!--        <h5 class="card-title"></h5>-->
+<!--        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--        <a href="#" class="btn btn-primary">Go somewhere</a>-->
+<!--    </div>-->
+
+</section>
+
     </div>
 
     <div class="col">
