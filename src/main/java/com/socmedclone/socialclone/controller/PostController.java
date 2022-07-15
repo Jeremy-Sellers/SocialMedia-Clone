@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class PostController {
     private final UserRepository userDao;
@@ -66,6 +68,9 @@ public class PostController {
 
     @GetMapping("/post/{id}/comment")
     public String commentForm(@PathVariable(name = "id") long postId, Model model){
+        Post post = postDao.findById(postId);
+        List<Comment> commentList = commentDao.findAllByPost(post);
+        model.addAttribute("commentList", commentList);
         model.addAttribute("comment", new Comment());
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
@@ -82,7 +87,7 @@ public class PostController {
         User user = principal;
         commentToSave.setUser(user);
         Comment newComment = commentDao.save(commentToSave);
-        return "redirect:/main";
+        return "redirect:/post/{id}/comment";
     }
 
     @PostMapping("/post/delete")
