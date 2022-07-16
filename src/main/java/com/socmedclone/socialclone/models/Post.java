@@ -16,8 +16,8 @@ public class Post {
     @Column(nullable = false, length = 250)
     private String postBody;
 
-    @Column(nullable = true)
-    private Long likes;
+    @Column(name = "likes")
+    private Long likes = (long) 0;
 
     @Column(nullable = true)
     private String comment;

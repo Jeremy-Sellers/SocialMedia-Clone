@@ -58,11 +58,18 @@ public class PostController {
     }
 
     @PostMapping("/post/like")
-    public String likePost(@ModelAttribute Post post, @PathVariable long id, Model model){
+    public String likePost(@RequestParam(name = "likePost") long id){
         Post findPost = postDao.findById(id);
-        findPost.setLikes(post.getLikes() + 1);
+        findPost.setLikes(findPost.getLikes() + 1);
         postDao.save(findPost);
-//       postDao.findById(id).setLikes(postDao.findById(id).getLikes() + 1);
+        return "redirect:/main";
+    }
+
+    @PostMapping("/post/unlike")
+    public String unlikePost(@RequestParam(name = "unlikePost") long id){
+        Post findPost = postDao.findById(id);
+        findPost.setLikes(findPost.getLikes() - 1);
+        postDao.save(findPost);
         return "redirect:/main";
     }
 

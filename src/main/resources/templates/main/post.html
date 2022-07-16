@@ -17,7 +17,7 @@
             <div class="card-body">
                 <a th:href="|/profile/${post.getUser().getUsername()}|"><h5 class="card-title" th:text="${post.user.username}"></h5></a>
                 <p class="card-text" th:text="${post.postBody}"></p>
-                <p th:text="${post.likes}"></p>
+               <p> likes: <span th:text="${post.likes}"></span></p>
             </div>
         </div>
 <!--Comment Form-->
@@ -38,12 +38,19 @@
 <section class="card border-0 shadow m-2" th:each="comment : ${commentList}">
     <a th:href="|/profile/${comment.getUser().getUsername()}|"> <p th:text="${comment.user.username}"></p> </a>
     <p th:text="${comment.commentBody}"></p>
-
-<!--    <div class="card-body">-->
-<!--        <h5 class="card-title"></h5>-->
-<!--        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-<!--        <a href="#" class="btn btn-primary">Go somewhere</a>-->
-<!--    </div>-->
+<!--    <p th:text="${comment.likes}"></p>-->
+<!--Like button-->
+    <div class="">
+        <form class="likeComment" th:method="post" th:action="@{/comment/like}">
+            <input type="hidden" th:value="${comment.id}" name="likeComment">
+            <button type="submit"
+                    class="btn btn-primary px-3 w-100 mx-auto border-0"
+                    style="background-color: #c61118;">
+                Like
+            </button>
+        </form>
+    </div>
+<!--Like button-->
 
 </section>
 
