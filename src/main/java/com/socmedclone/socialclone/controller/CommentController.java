@@ -21,11 +21,11 @@ public class CommentController {
         this.commentDao = commentDao;
     }
 
-//    @PostMapping("/comment/like")
-//    public String likePost(@RequestParam(name = "likeComment") long id){
-//        Comment findComment = commentDao.findById(id);
-//        findComment.setLikes(findComment.getLikes() + 1);
-//        commentDao.save(findComment);
-//        return "redirect:/post/{id}/comment";
-//    }
+    @PostMapping("/comment/like")
+    public String likePost(@RequestParam(name = "likeComment") long id){
+        Comment findComment = commentDao.findById(id);
+        findComment.setLikes(findComment.getLikes() + 1);
+        commentDao.save(findComment);
+        return "redirect:/main";
+    }
 }

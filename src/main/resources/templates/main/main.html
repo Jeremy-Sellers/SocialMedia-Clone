@@ -35,7 +35,7 @@
                 <div class="card-body">
                     <a th:href="|/profile/${post.getUser().getUsername()}|"><h5 class="card-title" th:text="${post.user.username}"></h5></a>
                     <p class="card-text" th:text="${post.postBody}"></p>
-<!--                    <p th:text="${post.likes}"></p>-->
+                    <p>likes: <span th:text="${post.likes}"></span> </p>
                     <form th:action="@{/post/{id}/comment(id=${post.id})}">
                         <button type="submit" class="btn btn-primary btn-sm">Comment</button>
                     </form>

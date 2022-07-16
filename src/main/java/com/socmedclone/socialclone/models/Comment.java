@@ -13,6 +13,9 @@ public class Comment {
     @Column(length = 250)
     private String commentBody;
 
+    @Column(name = "likes")
+    private Long likes = (long) 0;
+
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
@@ -21,11 +24,12 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Comment(long id, String commentBody, Post post, User user) {
+    public Comment(long id, String commentBody, Post post, User user, long likes) {
         this.id = id;
         this.commentBody = commentBody;
         this.post = post;
         this.user = user;
+        this.likes = likes;
     }
 
     public Comment(){
@@ -61,5 +65,13 @@ public class Comment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Long likes) {
+        this.likes = likes;
     }
 }

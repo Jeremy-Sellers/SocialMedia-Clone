@@ -38,7 +38,7 @@
 <section class="card border-0 shadow m-2" th:each="comment : ${commentList}">
     <a th:href="|/profile/${comment.getUser().getUsername()}|"> <p th:text="${comment.user.username}"></p> </a>
     <p th:text="${comment.commentBody}"></p>
-<!--    <p th:text="${comment.likes}"></p>-->
+    <p>likes: <span th:text="${comment.likes}"></span> </p>
 <!--Like button-->
     <div class="">
         <form class="likeComment" th:method="post" th:action="@{/comment/like}">
